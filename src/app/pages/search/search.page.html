@@ -1,0 +1,118 @@
+<ion-app>
+  <ion-split-pane when="sm" content-id="main-content">
+    <ion-menu content-id="main-content">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-list-header>
+            Navigate
+          </ion-list-header>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item button>
+              <ion-icon slot="start" name='home'></ion-icon>
+              <ion-label>
+                Home
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-toggle>
+              <ion-button>
+                <ion-icon slot="icon-only" name="menu"></ion-icon>
+              </ion-button>
+            </ion-menu-toggle>
+          </ion-buttons>
+          <ion-title>Split Pane Layout</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button color="primary" (click)="tambahPinjaman()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <ion-grid>
+          <ion-row>
+            <!-- <ion-col size="6" *ngFor="let photo of photoService.photos; index as position">
+            <ion-img src="{{ photo.webviewPath }}" (click)="showActionSheet(photo, position)"></ion-img>
+          </ion-col> -->
+            <ion-col *ngFor="let user of users | async" col-12 col-xl-2 col-lg-3 col-md-4>
+              <ion-card>
+                <ion-item>
+                  <ion-avatar item-start>
+                    <img [src]="user.picture.medium">
+                  </ion-avatar>
+                  <h2 text-capitalize>{{ user.name?.first }} {{ user.name?.last }}</h2>
+                </ion-item>
+                <ion-card-content>
+                  Bacon ipsum dolor amet salami prosciutto ham hock, strip steak buffalo ribeye pork chop. Beef ribs
+                  tenderloin tail shoulder.
+                  Spare ribs ham shoulder brisket rump hamburger. Pork belly kevin shoulder prosciutto ribeye pork chop
+                  chicken
+                  strip steak pig.
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>
+    </div>
+
+  </ion-split-pane>
+</ion-app>
+
+<!-- 
+<ion-grid>
+   <ion-row>
+     <ion-col *ngFor="let user of users | async" col-12 col-xl-2 col-lg-3 col-md-4>
+       <ion-card>
+         <ion-item>
+           <ion-avatar item-start>
+             <img [src]="user.picture.medium">
+           </ion-avatar>
+           <h2 text-capitalize>{{ user.name?.first }} {{ user.name?.last }}</h2>
+         </ion-item>
+         <ion-card-content>
+           Bacon ipsum dolor amet salami prosciutto ham hock, strip steak buffalo ribeye pork chop. Beef ribs tenderloin tail shoulder.
+           Spare ribs ham shoulder brisket rump hamburger. Pork belly kevin shoulder prosciutto ribeye pork chop chicken
+           strip steak pig.
+         </ion-card-content>
+       </ion-card>
+     </ion-col>
+   </ion-row>
+ </ion-grid> -->
+
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-content class="ion-padding">
+    <h1>Main Content</h1>
+  </ion-content>
+
+  <ion-fab vertical="bottom" horizontal="start">
+    <ion-fab-button (click)="tambahPinjaman()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+</ion-content> -->
