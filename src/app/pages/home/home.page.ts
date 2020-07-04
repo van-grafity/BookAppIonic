@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { ExtensionService } from '../../utils/extension/extension.service'
 
 @Component({
   selector: 'app-home',
@@ -10,19 +12,32 @@ export class HomePage {
   public items: Array<any>;
   public imgs: Array<any>;
   public _toastCtrl: ToastController;
+  public theDataBook: Array<any>;
+  myTest: {};
 
-  constructor(private toastCtrl: ToastController, private storage: Storage) {
-    this._toastCtrl = toastCtrl;
+  constructor(private storage: Storage, private extension: ExtensionService) {
+
     this.ionViewDidLoad();
     this.imgItems();
 
+    const user = {
+      username: 'Ivan',
+      password: '1234'
+    }
+
     // mengatur key/value
-    this.storage.set('name', 'Ivan Suhendra');
+    this.storage.set('name', user);
+    console.log('values array : ', user.username);
+
     // mengambil key/value
     this.storage.get('name').then((val) => {
-      console.log('Your name is', val);
+      console.log('Your name is', val.password);
+      if (val.password != null) {
+      }
     });
   }
+  id: string;
+  volumeInfo: { title: string; subtitle: string; authors: string[]; publisher: string; publishDate: string; description: string; averageRating: number; ratingsCount: number; imageLinks: { thumbnail: string; smallThumbnail: string; }; };
 
   ionViewDidLoad() {
     this.items = [
@@ -35,34 +50,26 @@ export class HomePage {
   imgItems() {
     this.imgs = [
       {
-        img: ('../../../assets//imgs//bannerTest.jpg')
+        img: ('../../../assets//img//bannerTest.jpg')
       },
       {
-        img: ('../../../assets//imgs//bannerTest.jpg')
+        img: ('../../../assets//img//bannerTest.jpg')
       },
       {
-        img: ('../../../assets//imgs//bannerTest.jpg')
+        img: ('../../../assets//img//bannerTest.jpg')
       }
     ]
   }
 
-  async viewItem(item: any) {
-
-    const toast = await this._toastCtrl.create({
-      message: 'My item is a ' + item,
-      duration: 2000,
-      position: item,
-
-    });
-    toast.present();
+  showView() {
+    this.extension.navigateCtrl('testing-view');
   }
 
-  async showToast(msg) {
-    let toast = await this.toastCtrl.create({
-      message: msg,
-      position: 'top',
-      duration: 2000
-    });
-    toast.present();
+  async showToast() {
+    this.extension.showToast('Clicked by my extension')
+  }
+
+  showDataBook() {
+    console.log(this.theDataBook);
   }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './utils/auth/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -9,15 +10,9 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
-  },
-  {
-    path: 'tabs',
-    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
-  },
-  {
-    path: 'category',
-    loadChildren: () => import('./pages/category/category.module').then(m => m.CategoryPageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
+    canActivate: [AuthGuardService]
+    // Here canActivate is a method inside the AuthGuardService which return boolen type values
   },
   {
     path: 'search',
@@ -26,6 +21,10 @@ const routes: Routes = [
   {
     path: 'testing-view',
     loadChildren: () => import('./pages/testing-view/testing-view.module').then(m => m.TestingViewPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   }
 ];
 

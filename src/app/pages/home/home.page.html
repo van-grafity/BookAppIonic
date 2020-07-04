@@ -1,24 +1,25 @@
 <ion-header>
-  <ion-toolbar hidden>
+  <!-- hidden -->
+  <ion-toolbar>
     <ion-title>
-      Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    
+
   <ion-row>
 
     <ion-slides pager style="width: 50%;">
       <ion-slide *ngFor="let imgBanner of imgs">
-        <img src={{imgBanner.img}} style="height: 100vh;">
+        <img src={{imgBanner.img}} style="height: 100vh;" (click)='showView()'>
       </ion-slide>
     </ion-slides>
 
     <ion-col>
       <ion-list padding *ngFor="let item of items">
-        <ion-item (click)="viewItem(item)">
+        <ion-item (click)="showToast()">
           <ion-col size="12">
             {{item.title}}
             <p>{{item.description}}</p>
@@ -26,7 +27,7 @@
         </ion-item>
       </ion-list>
     </ion-col>
-    
+
   </ion-row>
 
   <!-- <app-tabs></app-tabs> -->
