@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController, NavController, Platform } from '@ionic/angular';
+import { ToastController, NavController, Platform, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
@@ -14,6 +14,7 @@ export class ExtensionService {
 
   constructor(
     public toastCtrl: ToastController,
+    public loadingController: LoadingController,
     public navCtrl: NavController,
     public storage: Storage,
     public httpClient: HttpClient,
@@ -55,7 +56,8 @@ export class ExtensionService {
 
   // Put to Main Entry Point to add permission device
   permissionAndroid() {
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA)
+    .then(
       result => console.log('Has permission?', result.hasPermission),
       err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
     );

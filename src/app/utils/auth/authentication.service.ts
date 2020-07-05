@@ -3,6 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Platform, ToastController } from '@ionic/angular';
+import { LoadingService } from '../loading/loading.service';
+import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class AuthenticationService {
 
   authState = new BehaviorSubject(false);
 
-  constructor(private router: Router, private storage: Storage, private platforn: Platform, private toastController: ToastController) {
+  constructor(private router: Router, private storage: Storage, private platforn: Platform, private toastController: ToastController, private loadingService: LoadingService) {
     this.platforn.ready().then(() => {
       this.ifLoggedIn();
     })
@@ -30,9 +32,15 @@ export class AuthenticationService {
       user_name: 'Ivan',
       user_password: '1234'
     };
+    this.loadingService.present();
     this.storage.set('USER_INFO', dummy_response).then((response: Response) => {
-      this.router.navigate(['home']);
-      this.authState.next(true);
+      if (response) {
+        this.router.navigate(['home']);
+        this.authState.next(true);
+        this.loadingService.dismiss();
+      } else {
+        console.log("Somethink wrong data user");
+      }
     })
   }
 
