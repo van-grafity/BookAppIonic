@@ -3,6 +3,8 @@ import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { ExtensionService } from '../../utils/extension/extension.service'
 
+import { AuthenticationService } from 'src/app/utils/auth/authentication.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,7 +17,7 @@ export class HomePage {
   public theDataBook: Array<any>;
   myTest: {};
 
-  constructor(private storage: Storage, private extension: ExtensionService) {
+  constructor(private storage: Storage, private extension: ExtensionService, private authService: AuthenticationService) {
 
     this.ionViewDidLoad();
     this.imgItems();
@@ -71,5 +73,9 @@ export class HomePage {
 
   showDataBook() {
     console.log(this.theDataBook);
+  }
+
+  logoutUser() {
+    this.authService.logout();
   }
 }
